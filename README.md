@@ -5,7 +5,7 @@ Cross Platform MVVM application to easily schedule snapshot of urls in a pdf or 
 Download the Entire Deployment Folder
 Run Set.up exe
 
-#Main Components
+# Main Components
 -1-Simple Window
     Code Behind Binding
    
