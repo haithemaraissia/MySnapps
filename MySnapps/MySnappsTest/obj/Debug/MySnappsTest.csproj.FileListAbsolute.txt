@@ -1,0 +1,14 @@
+C:\Users\haraissia\Desktop\Play\MySnapps\MySnappsTest\bin\Debug\wkhtmltopdf\wkhtmltoimage.exe
+C:\Users\haraissia\Desktop\Play\MySnapps\MySnappsTest\bin\Debug\wkhtmltopdf\wkhtmltopdf.exe
+C:\Users\haraissia\Desktop\Play\MySnapps\MySnappsTest\bin\Debug\MySnappsTest.dll
+C:\Users\haraissia\Desktop\Play\MySnapps\MySnappsTest\bin\Debug\MySnappsTest.pdb
+C:\Users\haraissia\Desktop\Play\MySnapps\MySnappsTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\haraissia\Desktop\Play\MySnapps\MySnappsTest\bin\Debug\MySnapps.exe
+C:\Users\haraissia\Desktop\Play\MySnapps\MySnappsTest\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\haraissia\Desktop\Play\MySnapps\MySnappsTest\bin\Debug\GalaSoft.MvvmLight.dll
+C:\Users\haraissia\Desktop\Play\MySnapps\MySnappsTest\bin\Debug\MySnapps.pdb
+C:\Users\haraissia\Desktop\Play\MySnapps\MySnappsTest\bin\Debug\GalaSoft.MvvmLight.pdb
+C:\Users\haraissia\Desktop\Play\MySnapps\MySnappsTest\bin\Debug\GalaSoft.MvvmLight.xml
+C:\Users\haraissia\Desktop\Play\MySnapps\MySnappsTest\obj\Debug\MySnappsTest.csprojResolveAssemblyReference.cache
+C:\Users\haraissia\Desktop\Play\MySnapps\MySnappsTest\obj\Debug\MySnappsTest.dll
+C:\Users\haraissia\Desktop\Play\MySnapps\MySnappsTest\obj\Debug\MySnappsTest.pdb

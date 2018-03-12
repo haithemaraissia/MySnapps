@@ -1,0 +1,111 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
+        x:Class="MySnapps.MainWindow"
+        mc:Ignorable="d"
+        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
+        Title="MainWindow" Height="368.229" Width="779.994"  
+        ResizeMode="CanMinimize" Icon="Images/Splash.ico" WindowStartupLocation="CenterScreen">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <command:EventToCommand Command="{Binding Path=UrlViewModel.WindowClosing}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Background>
+        <ImageBrush ImageSource="Images/Splash.jpg"></ImageBrush>
+    </Window.Background>
+    <Canvas x:Name="WindowCanvas" Margin="0,0,-0.4,4.2">
+        <TextBox Canvas.Left="12" Canvas.Top="37" Height="26" 
+                 x:Name="UrlTextBox" Width="291" 
+                 TextChanged="urlTextBox_TextChanged" 
+                 KeyDown="urlTextBox_KeyDown" 
+                 GotFocus="urlTextBox_GotFocus"
+                 Text="{Binding Path=UrlViewModel.UrlContent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+        </TextBox>
+        <ListView Canvas.Left="12" Canvas.Top="106" Height="229" 
+                  x:Name="UrlListView" Width="291"
+                  SelectionMode="Single" 
+                  SelectedIndex="{Binding UrlViewModel.UrlSelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  SelectedItem="{Binding UrlViewModel.UrlSelectedItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  ItemsSource="{Binding UrlViewModel.Urls, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding UrlViewModel.SelectionChanged}"  CommandParameter="{Binding ElementName=UrlListView, Path=SelectedItem}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Label Content="{Binding Link}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button x:Name="addButton" Canvas.Left="138" Canvas.Top="70" Height="25" Width="79" 
+                Command="{Binding UrlViewModel.AddUrlCommand}" IsDefault="True" Content="Add"/>
+        <Button x:Name="removeButton" Canvas.Left="224" Canvas.Top="70" Height="25" Width="79" 
+                Command="{Binding UrlViewModel.RemoveUrlCommand}" Content="Remove"/>
+        <Button x:Name="okButton" Canvas.Left="312" Canvas.Top="37" Content="OK" Height="26" Width="85" 
+                Command="{Binding UrlViewModel.OkButton}" />
+        <Button x:Name="closeButton" Canvas.Left="312" Canvas.Top="74" Content="Close" Height="26" Width="85" 
+                Command="{Binding UrlViewModel.CloseButton}"/>
+        <Button x:Name="saveButton" Canvas.Left="312" Canvas.Top="110" Content="Save" Height="26" Width="85"
+                Command="{Binding UrlViewModel.SaveUrlListCommand}"/>
+        <Label x:Name="UrlsLabel" Content="Urls" Canvas.Left="12" Canvas.Top="10" FontWeight="Bold"/>
+        <GroupBox x:Name="Global" Background="White" Canvas.Left="447" Canvas.Top="4" Height="331" Width="317"/>
+        <Separator Height="39" Canvas.Left="275" Margin="0" Width="321" RenderTransformOrigin="0.501,0.504" Canvas.Top="144" Background="#FFFFF9F9" BorderThickness="5" ClipToBounds="True" MinWidth="5" UseLayoutRounding="False">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform X="-1.368" Y="-0.716"/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <GroupBox x:Name="FormatGroupBox" Header="Format" Canvas.Left="455" Canvas.Top="15" Width="288" Height="103" FontWeight="Bold" Background="White">
+            <Grid x:Name="FormatGrid">
+                <RadioButton x:Name="PdfRadioButton" Content="PDF" GroupName="FormatSelection" Margin="72,16,122.2,17.6" FontWeight="Normal" IsChecked="{Binding ProcessViewModel.PDFChecked}"/>
+                <RadioButton x:Name="JpgRadioButton" Content="JPEG" GroupName="FormatSelection"  Margin="165,16,36.2,16.6" FontWeight="Normal"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Canvas.Left="493" Canvas.Top="79" Height="39" Width="242" Background="White">
+            <Grid x:Name="ViewPortGrid" Margin="0,6,-0.2,-6.2">
+                <Label x:Name="PDFOnlyLable" Content="PDF Only" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="7" Height="26" Width="48" Margin="182,17,-0.2,-10"/>
+                <RadioButton x:Name="mobileRadioButton" Content="MobileView" GroupName="ViewPortSelection" Margin="141,0,-20,16" />
+                <RadioButton x:Name="desktopRadioButton" Content="DesktopView" GroupName="ViewPortSelection"  Margin="10,0,113,0" IsChecked="{Binding ProcessViewModel.DesktopViewChecked}" />
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="DestinationGroupBox" Header="Destination" Canvas.Left="455" Canvas.Top="123" Height="82" Width="288" FontWeight="Bold" Background="White">
+            <Grid x:Name="DestinationGrid">
+                <Button x:Name="BrowseButton" Content="Browse" Canvas.Left="467" Canvas.Top="149" 
+                        Command="{Binding ProcessViewModel.BrowseButton}" 
+                        Margin="0,19,189.2,16.2" FontWeight="Normal"/>
+                <TextBox x:Name="tbxFolder" Text="{Binding ProcessViewModel.OutputFolder}" Height="22" Canvas.Left="561" TextWrapping="Wrap" Canvas.Top="149" Width="168" Margin="107,21,0.2,16.2" FontWeight="Normal"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="ViewGroupBox" Header="Schedule " Canvas.Left="455" Canvas.Top="221" Width="288" Height="69" FontWeight="Bold" Background="White">
+            <Grid>
+                <xctk:TimePicker x:Name="TimePicker" Value="{Binding ProcessViewModel.TimePicker}"  Margin="99,17,0,10.4" FontWeight="Normal" HorizontalAlignment="Left" Width="105"/>
+                <Label x:Name="RunEveryDayLabel" Content="Run Everyday at:" FontWeight="Normal" Margin="0,11,176.2,10.4"/>
+                <CheckBox x:Name="RunEveryDayCheckBox" Content="Enabled" Margin="209,17,-0.8,8.4" FontWeight="Normal" IsChecked="{Binding ProcessViewModel.RunEveryDayCheckBox}" />
+            </Grid>
+        </GroupBox>
+        <Grid Height="10" Canvas.Left="351" Canvas.Top="244">
+            <ProgressBar Minimum="0" Maximum="100" Value="{Binding ProcessViewModel.StatusProgress}" x:Name="pbStatus" Margin="-94,-43,-112.8,0" Height="35" VerticalAlignment="Top" HorizontalAlignment="Left" Width="230" Visibility="{Binding ProcessViewModel.StatusVisibility}"/>
+            <TextBlock x:Name="pbStatusCount" Text="{Binding Value, ElementName=pbStatus, StringFormat=\{0:0\}%}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="22,-35,-20.8,29" Visibility="{Binding ElementName=pbStatus, Path=Visibility}" />
+        </Grid>
+        <Button x:Name="StartButton" Content="Start" Canvas.Left="468" Canvas.Top="304" Width="75" Background="#FF009131" Foreground="#FFF9F6F6" FontWeight="Bold" 
+                Command="{Binding ProcessViewModel.StartButton}" Focusable="False"/>
+        <Button x:Name="StopButton" Content="Stop" Canvas.Left="655" Canvas.Top="304" 
+                Width="75" FontWeight="Bold" Background="#FFFA0A0A" Foreground="#FFF7F0F0"
+                Command="{Binding ProcessViewModel.StopButton}" Focusable="False"/>
+        <Label x:Name="IsDataChangeLabel" Canvas.Left="86" Canvas.Top="10" Visibility="Hidden" 
+               Content="{Binding UrlViewModel.DataChanged, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+    </Canvas>
+</Window>
